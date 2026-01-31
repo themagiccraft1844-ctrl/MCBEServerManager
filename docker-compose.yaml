@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: mc-manager-api
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/app/data
+      - ./backend/uploads:/app/uploads
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build: ./frontend
+    container_name: mc-manager-ui
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+networks:
+  default:
+    name: mc-network
