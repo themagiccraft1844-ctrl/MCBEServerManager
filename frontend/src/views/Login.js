@@ -31,7 +31,8 @@ const LoginView = ({ onLoginSuccess, apiBase, showToast }) => {
     
     try {
       const res = await axios.post(`${apiBase}/api/login`, creds);
-      onLoginSuccess(res.data);
+      const token = res.data?.token ?? res.data;
+      onLoginSuccess(token);
       if (showToast) showToast("Login Berhasil!", "success");
     } catch (err) {
       const errMsg = err.response?.data?.error || "Username atau password salah.";

@@ -6,13 +6,14 @@ import { Settings as SettingsIcon, Cpu, Shield, Lock } from 'lucide-react';
 import { FormField } from '../components/UIAssets';
 
 const SettingsView = ({ sessionConfig, onUpdateSettings }) => {
-  const [localSettings, setLocalSettings] = useState(sessionConfig);
+  const defaultConfig = { timeoutMinutes: 15, ramDefault: 2048, autoLogoutOtherDevices: false };
+  const [localSettings, setLocalSettings] = useState(() => ({ ...(sessionConfig || defaultConfig) }));
   const [newPassword, setNewPassword] = useState('');
 
   const handleSave = () => {
     const payload = { ...localSettings };
     if (newPassword) payload.password = newPassword;
-    onUpdateSettings(payload);
+    if (typeof onUpdateSettings === 'function') onUpdateSettings(payload);
     setNewPassword('');
   };
 

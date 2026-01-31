@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge, Button, Form, Spinner, Toast, ToastContainer } from 'react-bootstrap';
-import { Activity } from 'lucide-react';
+import { Activity, CheckCircle, AlertCircle, Info, XCircle } from 'lucide-react';
 
 /**
  * Komponen Badge untuk status server
@@ -43,12 +43,15 @@ export const FormField = ({ label, icon: Icon, ...props }) => (
 /**
  * Komponen Notifikasi Toast
  */
-export const CustomToast = ({ show, onClose, message, variant }) => (
-  <ToastContainer position="top-end" className="p-3" style={{ zIndex: 9999 }}>
-    <Toast onClose={onClose} show={show} delay={3000} autohide bg={variant}>
-      <Toast.Body className="text-white fw-bold d-flex align-items-center gap-2">
-        <Activity size={16} /> {message}
-      </Toast.Body>
-    </Toast>
-  </ToastContainer>
-);
+export const CustomToast = ({ show, onClose, message, variant }) => {
+  const Icon = variant === 'success' ? CheckCircle : variant === 'danger' ? XCircle : variant === 'info' ? Info : AlertCircle;
+  return (
+    <ToastContainer position="top-end" className="p-3" style={{ zIndex: 9999 }}>
+      <Toast onClose={onClose} show={show} delay={3000} autohide bg={variant}>
+        <Toast.Body className="text-white fw-bold d-flex align-items-center gap-2">
+          <Icon size={16} /> {message}
+        </Toast.Body>
+      </Toast>
+    </ToastContainer>
+  );
+};

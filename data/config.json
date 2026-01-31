@@ -1,0 +1,14 @@
+{
+  "admin": {
+    "username": "admin",
+    "password": "adminpassword123"
+  },
+  "settings": {
+    "timeoutMinutes": 60,
+    "ramDefault": 2048,
+    "autoLogout": true
+  },
+  "secrets": {
+    "jwtKey": "rahasia-super-aman-1769871105741"
+  }
+}
